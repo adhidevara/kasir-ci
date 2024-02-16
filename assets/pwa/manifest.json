@@ -1,0 +1,17 @@
+{
+    "id": "/kasir2/kasir",
+    "name": "Kasir Seblak Umi",
+    "short_name": "KSU",
+    "description": "Aplikasi Kasir Seblak Umi.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#007bff",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "640x640",
+            "type": "image/png"
+        }
+    ]
+}
