@@ -42,6 +42,33 @@
           </a>
         </li>
         <?php if ($role === 'admin'): ?>
+          <li class="nav-item has-treeview <?php echo $uri == 'igredients' || $uri == 'resep' || $uri == 'bahan' ? 'menu-open' : 'no' ?>">
+          <a href="#" class="nav-link <?php echo $uri == 'igredients' || $uri == 'resep' || $uri == 'bahan' ? 'active' : 'no' ?>">
+            <i class="nav-icon fas fa-box"></i>
+            <p>
+              Ingredients
+            </p>
+            <i class="right fas fa-angle-right"></i>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo site_url('resep') ?>" class="nav-link <?php echo $uri == 'resep' ? 'active' : 'no' ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                  Resep
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo site_url('bahan') ?>" class="nav-link <?php echo $uri == 'bahan' ? 'active' : 'no' ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                  Bahan
+                </p>
+              </a>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item has-treeview <?php echo $uri == 'produk' || $uri == 'kategori_produk' || $uri == 'satuan_produk' ? 'menu-open' : 'no' ?>">
           <a href="#" class="nav-link <?php echo $uri == 'produk' || $uri == 'kategori_produk' || $uri == 'satuan_produk' ? 'active' : 'no' ?>">
             <i class="nav-icon fas fa-box"></i>
