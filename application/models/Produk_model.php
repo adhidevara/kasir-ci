@@ -74,6 +74,16 @@ class Produk_model extends CI_Model {
 		return $this->db->query('SELECT produk.nama_produk, produk.stok FROM `produk` ORDER BY CONVERT(stok, decimal) DESC LIMIT 50')->result();
 	}
 
+	public function getDetailResep($id) 
+	{
+		$this->db->select('produk.id, produk.nama_produk AS Nama_Menu, produk.harga as Harga_Jual, resep.id, bahan.nama as Nama_Bahan, bahan.unit, bahan.unit_cost AS Biaya_Per_Item, detail_resep.qty AS Proporsi_Resep');
+		$this->db->from($this->table);
+		$this->db->join('resep', 'produk.id = resep.id_produk');
+		$this->db->join('detail_resep', 'resep.id = detail_resep.id_resep');
+		$this->db->join('bahan', 'detail_resep.id_bahan = bahan.id');
+		$this->db->where('produk.id', $id);
+		return $this->db->get();
+	}
 }
 
 /* End of file Produk_model.php */
