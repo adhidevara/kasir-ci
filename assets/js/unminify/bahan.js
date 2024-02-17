@@ -1,5 +1,5 @@
 let url;
-let produk = $("#bahan").DataTable({
+let bahan = $("#bahan").DataTable({
     responsive: true,
     scrollX: true,
     ajax: readUrl,
@@ -9,20 +9,19 @@ let produk = $("#bahan").DataTable({
         targets: 0
     }],
     order: [
-        [1, "asc"]
+        [1, "desc"]
     ],
     columns: [
-        { data: null }, 
-        { data: "barcode" },
+        { data: null },
         { data: "nama" },
-        { data: "satuan" },
+        { data: "unit" },
         { data: "cost" },
-        { data: "action" }
+		{ data: "action" }
     ]
 });
 
 function reloadTable() {
-    produk.ajax.reload()
+    bahan.ajax.reload()
 }
 
 function addData() {
@@ -48,14 +47,15 @@ function remove(id) {
         text: "Hapus data ini?",
         type: "warning",
         showCancelButton: true
-    }).then(() => {
-        $.ajax({
-            url: deleteUrl,
-            type: "post",
-            dataType: "json",
-            data: {
-                id: id
-            },
+    }).then((result) => {
+		if(result.value === true){
+			$.ajax({
+				url: deleteUrl,
+				type: "post",
+				dataType: "json",
+				data: {
+					id: id
+				},
             success: () => {
                 Swal.fire("Sukses", "Sukses Menghapus Data", "success");
                 reloadTable();
@@ -64,6 +64,11 @@ function remove(id) {
                 console.log(a);
             }
         })
+		}
+		else{
+			console.log('cancel');	
+
+		}
     })
 }
 
@@ -92,7 +97,7 @@ function add() {
 
 function edit(id) {
     $.ajax({
-        url: getProdukUrl,
+        url: getBahanUrl,
         type: "post",
         dataType: "json",
         data: {
@@ -101,8 +106,8 @@ function edit(id) {
         success: res => {
             $('[name="id"]').val(res.id);
             $('[name="nama"]').val(res.nama);
-            $('[name="satuan"]').append(`<option value='${res.satuan_id}'>${res.satuan}</option>`);
-            $('[name="cost"]').append(`<option value='${res.cost}'>${res.cost}</option>`);
+            $('[name="satuan"]').append(`<option value='${res.unitr}'>${res.unit}</option>`);
+            $('[name="cost"]').val(res.unit_cost);
             $(".modal").modal("show");
             $(".modal-title").html("Edit Data");
             $('.modal button[type="submit"]').html("Edit");
@@ -113,8 +118,8 @@ function edit(id) {
         }
     });
 }
-produk.on("order.dt search.dt", () => {
-    produk.column(0, {
+bahan.on("order.dt search.dt", () => {
+    bahan.column(0, {
         search: "applied",
         order: "applied"
     }).nodes().each((el, val) => {

@@ -47,9 +47,9 @@
                 <tr>
                   <th>No</th>
                   <th>Nama</th>
-                  <th>Satuan</th>
-                  <th>Cost per Unit</th>
-                  <th>Actions</th>
+                  <th>Unit</th>
+                  <th>Cost</th>
+                  <th>Action</th>
                 </tr>
               </thead>
             </table>
@@ -77,7 +77,7 @@
       <input type="hidden" name="id">
       <div class="form-group">
         <label>Nama</label>
-        <input type="text" class="form-control" placeholder="Nama" name="nama_produk" required>
+        <input type="text" class="form-control" placeholder="Nama" name="nama" required>
       </div>
       <div class="form-group">
         <label>Satuan</label>
@@ -85,7 +85,7 @@
       </div>
       <div class="form-group">
         <label>Cost per Item</label>
-        <select name="cost" id="cost" class="form-control select2" required></select>
+        <input name="cost" id="cost" class="form-control select2" required></select>
       </div>
       <button class="btn btn-success" type="submit">Add</button>
       <button class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -107,10 +107,10 @@
   var addUrl = '<?php echo site_url('bahan/add') ?>';
   var deleteUrl = '<?php echo site_url('bahan/delete') ?>';
   var editUrl = '<?php echo site_url('bahan/edit') ?>';
-  var getProdukUrl = '<?php echo site_url('bahan/get_produk') ?>';
+  var getBahanUrl = '<?php echo site_url('bahan/get_bahan') ?>';
   var kategoriSearchUrl = '<?php echo site_url('bahan/search') ?>';
   var satuanSearchUrl = '<?php echo site_url('satuan_produk/search') ?>';
 </script>
-<script src="<?php echo base_url('assets/js/produk.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/unminify/bahan.js') ?>"></script>
 </body>
 </html>
