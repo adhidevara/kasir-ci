@@ -52,14 +52,15 @@ function remove(id) {
         text: "Hapus data ini?",
         type: "warning",
         showCancelButton: true
-    }).then(() => {
-        $.ajax({
-            url: removeUrl,
-            type: "post",
-            dataType: "json",
-            data: {
-                id: id
-            },
+    }).then((result) => {
+		if(result.value === true){
+			$.ajax({
+				url: removeUrl,
+				type: "post",
+				dataType: "json",
+				data: {
+					id: id
+				},
             success: () => {
                 Swal.fire("Sukses", "Sukses Menghapus Data", "success");
                 reloadTable();
@@ -68,6 +69,11 @@ function remove(id) {
                 console.log(err)
             }
         })
+		}
+		else{
+			console.log('cancel');	
+
+		}
     })
 }
 

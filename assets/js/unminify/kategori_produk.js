@@ -40,28 +40,35 @@ function addData() {
     })
 }
 
+
 function remove(id) {
     Swal.fire({
         title: "Hapus",
         text: "Hapus data ini?",
         type: "warning",
         showCancelButton: true
-    }).then(() => {
-        e.value && $.ajax({
-            url: deleteUrl,
-            type: "post",
-            dataType: "json",
-            data: {
-                id: id
-            },
+    }).then((result) => {
+        if(result.value === true){
+			$.ajax({
+				url: deleteUrl,
+				type: "post",
+				dataType: "json",
+				data: {
+					id: id
+				},
             success: () => {
                 Swal.fire("Sukses", "Sukses Menghapus Data", "success");
-                reloadTable()
+                reloadTable();
             },
             error: err => {
                 console.log(err)
             }
         })
+		}
+		else{
+			console.log('cancel');	
+
+		}
     })
 }
 

@@ -60,8 +60,8 @@ function remove(id) {
                 Swal.fire("Sukses", "Sukses Menghapus Data", "success");
                 reloadTable();
             },
-            error: () => {
-                console.log(a);
+            error: err => {
+                console.log(err)
             }
         })
 		}
