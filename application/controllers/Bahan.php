@@ -36,7 +36,7 @@ class Bahan extends CI_Controller {
 			foreach ($this->bahan_model->read()->result() as $bahan) {
 				$data[] = array(
 					'nama' => $bahan->nama,
-					'cost' => $bahan->unit_cost,
+					'cost' => "Rp.".number_format($bahan->unit_cost, 0, ',', '.').",-",
 					'unit' => $bahan->unit,
 					'action' => '<button class="btn btn-sm btn-success" onclick="edit('.$bahan->id.')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove('.$bahan->id.')">Delete</button>'
 				);
@@ -79,5 +79,20 @@ class Bahan extends CI_Controller {
 		if ($this->bahan_model->update($id,$data)) {
 			echo json_encode('sukses');
 		}
+	}
+
+	public function search()
+	{
+		header('Content-type: application/json');
+		$bahan = $this->input->post('bahan');
+		$search = $this->bahan_model->search($bahan);
+		foreach ($search as $bahan) {
+			$data[] = array(
+				'id' => $bahan->id,
+				'text' => $bahan->nama,
+				'cost' => $bahan->unit_cost
+			);
+		}
+		echo json_encode($data);
 	}
 }

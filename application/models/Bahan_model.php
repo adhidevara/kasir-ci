@@ -32,10 +32,17 @@ class Bahan_model extends CI_Model {
 
 	public function getBahan($id)
 	{
-		$this->db->select('bahan.id, bahan.nama, bahan.unit, bahan.unit_cost');
+		$this->db->select('bahan.id, bahan.nama, bahan.unit, satuan_produk.satuan, bahan.unit_cost');
 		$this->db->from($this->table);
+		$this->db->join('satuan_produk', 'bahan.unit = satuan_produk.id');
 		$this->db->where('bahan.id', $id);
 		return $this->db->get();
+	}
+
+	public function search($search="")
+	{
+		$this->db->like('nama', $search);
+		return $this->db->get($this->table)->result();
 	}
 }
 

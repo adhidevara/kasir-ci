@@ -42,11 +42,11 @@
             <button class="btn btn-success" data-toggle="modal" data-target="#modal" onclick="add()">Add</button>
           </div>
           <div class="card-body">
-            <table class="table w-100 table-bordered table-hover" id="bahan">
+            <table class="table w-100 table-bordered table-hover" id="resep">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama Produk</th>
+                  <th>Nama Resep</th>
                   <th>Cost per Item (Estimated)</th>
                   <th>Action</th>
                 </tr>
@@ -63,7 +63,7 @@
 </div>
 
 <div class="modal fade" id="modal">
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
 <div class="modal-content">
   <div class="modal-header">
     <h5 class="modal-title">Add Data</h5>
@@ -73,20 +73,34 @@
   </div>
   <div class="modal-body">
     <form id="form">
-      <input type="hidden" name="id">
+      <input type="hidden" name="id" id="id">
       <div class="form-group">
-        <label>Nama Produk</label>
-        <input type="text" class="form-control" placeholder="Nama" name="nama" required>
+        <label>Nama Resep Produk</label>
+        <input type="text" name="nama" id="nama" class="form-control" required>
       </div>
+
       <div class="form-group">
-        <label>Bahan Baku</label>
-        <select name="bahan_baku" id="bahan_baku" class="form-control select2" required></select>
+        <label>Total Cost Resep</label>
+        <input name="cost" id="cost" class="form-control select2" disabled></select>
       </div>
-      <div class="form-group">
-        <label>Cost per Item</label>
-        <input name="cost" id="cost" class="form-control select2" required></select>
-      </div>
-      <button class="btn btn-success" type="submit">Add</button>
+
+			<table id="menuTable" class="table w-100 table-bordered table-hover">
+				<tr>
+					<th>Nama Bahan</th>
+					<th>Qty</th>
+					<th>Bahan Utama</th>
+					<th>Action</th>
+				</tr>
+				<tr id='tr'>
+					<td><div class="form-group"><select id="bahan" name="menuName[]" class="form-control select2" required></select></div><input type="hidden" id="id_bahan_before" value="0"></td>
+					<td><div class="form-group"><input class="form-control" type="number" name="qty[]" min="0" required /></div></td>
+					<td><div class="form-group"><input type="radio" class="form-control" name="isBahanUtama" required /></div></td>
+					<td></td>
+				</tr>
+			</table><br>
+			
+      <button class="btn btn-add btn-success" type="submit">Add</button>
+			<button class="btn btn-info" type="button" onclick="addRow()">Add Bahan</button>
       <button class="btn btn-danger" data-dismiss="modal">Close</button>
     </form>
   </div>
@@ -102,14 +116,16 @@
 <script src="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/adminlte/plugins/select2/js/select2.min.js') ?>"></script>
 <script>
-  var readUrl = '<?php echo site_url('bahan/read') ?>';
-  var addUrl = '<?php echo site_url('bahan/add') ?>';
-  var deleteUrl = '<?php echo site_url('bahan/delete') ?>';
-  var editUrl = '<?php echo site_url('bahan/edit') ?>';
+  var readUrl = '<?php echo site_url('resep/read') ?>';
+  var addUrl = '<?php echo site_url('resep/add') ?>';
+  var deleteUrl = '<?php echo site_url('resep/delete') ?>';
+  var editUrl = '<?php echo site_url('resep/edit') ?>';
   var getBahanUrl = '<?php echo site_url('bahan/get_bahan') ?>';
-  var kategoriSearchUrl = '<?php echo site_url('bahan/search') ?>';
-  var satuanSearchUrl = '<?php echo site_url('satuan_produk/search') ?>';
+  var deleteBahan = '<?php echo site_url('resep/delete_detail_resep') ?>';
+	var getResepUrl = '<?php echo site_url('resep/get_resep') ?>';
+  var kategoriSearchUrl = '<?php echo site_url('resep/search') ?>';
+  var bahanSearchUrl = '<?php echo site_url('bahan/search') ?>';
 </script>
-<script src="<?php echo base_url('assets/js/unminify/bahan.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/unminify/resep.js') ?>"></script>
 </body>
 </html>

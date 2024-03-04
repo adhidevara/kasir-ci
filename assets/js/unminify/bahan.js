@@ -106,7 +106,7 @@ function edit(id) {
         success: res => {
             $('[name="id"]').val(res.id);
             $('[name="nama"]').val(res.nama);
-            $('[name="satuan"]').append(`<option value='${res.unitr}'>${res.unit}</option>`);
+            $('[name="satuan"]').append(`<option value='${res.unit}'>${res.satuan}</option>`);
             $('[name="cost"]').val(res.unit_cost);
             $(".modal").modal("show");
             $(".modal-title").html("Edit Data");
