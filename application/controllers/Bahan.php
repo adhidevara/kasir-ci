@@ -22,7 +22,8 @@ class Bahan extends CI_Controller {
 		$data = array(
 			'nama' => $this->input->post('nama'),
 			'unit' => $this->input->post('satuan'),
-			'unit_cost' => $this->input->post('cost')
+			'unit_cost' => $this->input->post('cost'),
+			'stok_bahan' => $this->input->post('stok')
 		);		
 		if ($this->bahan_model->create($data)) {
 			echo json_encode($data);
@@ -37,6 +38,7 @@ class Bahan extends CI_Controller {
 				$data[] = array(
 					'nama' => $bahan->nama,
 					'cost' => "Rp.".number_format($bahan->unit_cost, 0, ',', '.').",-",
+					'stok_bahan' => $bahan->stok_bahan,
 					'unit' => $bahan->unit,
 					'action' => '<button class="btn btn-sm btn-success" onclick="edit('.$bahan->id.')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove('.$bahan->id.')">Delete</button>'
 				);
@@ -74,6 +76,7 @@ class Bahan extends CI_Controller {
 		$data = array(
 			'nama' => $this->input->post('nama'),
 			'unit' => $this->input->post('satuan'),
+			'stok_bahan' => $this->input->post('stok'),
 			'unit_cost' => $this->input->post('cost')
 		);
 		if ($this->bahan_model->update($id,$data)) {
@@ -90,6 +93,7 @@ class Bahan extends CI_Controller {
 			$data[] = array(
 				'id' => $bahan->id,
 				'text' => $bahan->nama,
+				'satuan' => $bahan->satuan,
 				'cost' => $bahan->unit_cost
 			);
 		}

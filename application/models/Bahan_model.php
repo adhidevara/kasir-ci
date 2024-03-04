@@ -12,7 +12,7 @@ class Bahan_model extends CI_Model {
 
 	public function read()
 	{
-		$this->db->select('bahan.id, bahan.nama as nama, bahan.unit_cost as unit_cost, satuan_produk.satuan as unit, bahan.unit as unitr');
+		$this->db->select('bahan.id, bahan.nama as nama, bahan.stok_bahan, bahan.unit_cost as unit_cost, satuan_produk.satuan as unit, bahan.unit as unitr');
 		$this->db->from($this->table);
 		$this->db->join('satuan_produk', 'bahan.unit = satuan_produk.id');
 		return $this->db->get();
@@ -32,7 +32,7 @@ class Bahan_model extends CI_Model {
 
 	public function getBahan($id)
 	{
-		$this->db->select('bahan.id, bahan.nama, bahan.unit, satuan_produk.satuan, bahan.unit_cost');
+		$this->db->select('bahan.id, bahan.nama, bahan.stok_bahan, bahan.unit, satuan_produk.satuan, bahan.unit_cost');
 		$this->db->from($this->table);
 		$this->db->join('satuan_produk', 'bahan.unit = satuan_produk.id');
 		$this->db->where('bahan.id', $id);
@@ -41,8 +41,11 @@ class Bahan_model extends CI_Model {
 
 	public function search($search="")
 	{
+		$this->db->select('bahan.id, bahan.nama, bahan.unit, satuan_produk.satuan, bahan.unit_cost');
+		$this->db->from($this->table);
+		$this->db->join('satuan_produk', 'bahan.unit = satuan_produk.id');
 		$this->db->like('nama', $search);
-		return $this->db->get($this->table)->result();
+		return $this->db->get()->result();
 	}
 }
 

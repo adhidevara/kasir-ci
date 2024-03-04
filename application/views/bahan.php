@@ -48,6 +48,7 @@
                   <th>No</th>
                   <th>Nama</th>
                   <th>Unit</th>
+                  <th>Stok</th>
                   <th>Cost</th>
                   <th>Action</th>
                 </tr>
@@ -83,9 +84,13 @@
         <label>Satuan</label>
         <select name="satuan" id="satuan" class="form-control select2" required></select>
       </div>
+			<div class="form-group">
+        <label>Stok</label>
+        <input type="number" name="stok" id="stok" class="form-control select2" placeholder="Stok" required></select>
+      </div>
       <div class="form-group">
         <label>Cost per Item</label>
-        <input name="cost" id="cost" class="form-control select2" required></select>
+        <input type="number" name="cost" id="cost" class="form-control select2" placeholder="Cost" required></select>
       </div>
       <button class="btn btn-success" type="submit">Add</button>
       <button class="btn btn-danger" data-dismiss="modal">Close</button>

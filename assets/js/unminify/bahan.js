@@ -15,6 +15,7 @@ let bahan = $("#bahan").DataTable({
         { data: null },
         { data: "nama" },
         { data: "unit" },
+        { data: "stok_bahan" },
         { data: "cost" },
 		{ data: "action" }
     ]
@@ -107,6 +108,7 @@ function edit(id) {
             $('[name="id"]').val(res.id);
             $('[name="nama"]').val(res.nama);
             $('[name="satuan"]').append(`<option value='${res.unit}'>${res.satuan}</option>`);
+			$('[name="stok"]').val(res.stok_bahan);
             $('[name="cost"]').val(res.unit_cost);
             $(".modal").modal("show");
             $(".modal-title").html("Edit Data");
