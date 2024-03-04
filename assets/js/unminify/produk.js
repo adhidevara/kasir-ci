@@ -16,6 +16,7 @@ let produk = $("#produk").DataTable({
         { data: "barcode" },
         { data: "nama" },
         { data: "satuan" },
+        { data: "resep" },
         { data: "kategori" },
         { data: "harga" },
         { data: "stok" },
@@ -111,6 +112,7 @@ function edit(id) {
             $('[name="barcode"]').val(res.barcode);
             $('[name="nama_produk"]').val(res.nama_produk);
             $('[name="satuan"]').append(`<option value='${res.satuan_id}'>${res.satuan}</option>`);
+            $('[name="resep"]').append(`<option value='${res.resep_id}'>${res.resep}</option>`);
             $('[name="kategori"]').append(`<option value='${res.kategori_id}'>${res.kategori}</option>`);
             $('[name="harga"]').val(res.harga);
             $('[name="stok"]').val(res.stok);

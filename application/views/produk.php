@@ -46,9 +46,10 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Barcode</th>
+                  <th>Kode Produk</th>
                   <th>Nama</th>
                   <th>Satuan</th>
+                  <th>Resep</th>
                   <th>Kategori</th>
                   <th>Harga</th>
                   <th>Stok</th>
@@ -79,7 +80,7 @@
     <form id="form">
       <input type="hidden" name="id">
       <div class="form-group">
-        <label>Barcode</label>
+        <label>Kode Produk</label>
         <input type="text" class="form-control" placeholder="Barcode" name="barcode" required>
       </div>
       <div class="form-group">
@@ -89,6 +90,10 @@
       <div class="form-group">
         <label>Satuan</label>
         <select name="satuan" id="satuan" class="form-control select2" required></select>
+      </div>
+      <div class="form-group">
+        <label>Resep</label>
+        <select id="resep" name="resep" class="form-control select2" required></select>
       </div>
       <div class="form-group">
         <label>Kategori</label>

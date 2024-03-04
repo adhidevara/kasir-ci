@@ -84,6 +84,11 @@ class Produk_model extends CI_Model {
 		$this->db->where('produk.id', $id);
 		return $this->db->get();
 	}
+
+	public function getResep(){
+		$this->db->from('resep');
+		return $this->db->get();
+	}
 }
 
 /* End of file Produk_model.php */
