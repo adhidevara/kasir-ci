@@ -16,7 +16,7 @@ let produk = $("#produk").DataTable({
         { data: "barcode" },
         { data: "nama" },
         { data: "satuan" },
-        { data: "resep" },
+        { data: "nama_resep" },
         { data: "kategori" },
         { data: "harga" },
         { data: "stok" },

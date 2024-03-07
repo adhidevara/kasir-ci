@@ -12,10 +12,11 @@ class Produk_model extends CI_Model {
 
 	public function read()
 	{
-		$this->db->select('produk.id, produk.barcode, produk.nama_produk, produk.harga, produk.stok, kategori_produk.kategori, satuan_produk.satuan');
+		$this->db->select('produk.id, produk.id_resep, resep.nama as nama_resep, resep.cost_resep, produk.barcode, produk.nama_produk, produk.harga, produk.stok, kategori_produk.kategori, satuan_produk.satuan');
 		$this->db->from($this->table);
 		$this->db->join('kategori_produk', 'produk.kategori = kategori_produk.id');
 		$this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id');
+		$this->db->join('resep', 'resep.id = produk.id_resep');
 		return $this->db->get();
 	}
 
@@ -33,7 +34,7 @@ class Produk_model extends CI_Model {
 
 	public function getProduk($id)
 	{
-		$this->db->select('produk.id, produk.barcode, produk.nama_produk, produk.harga, produk.stok, kategori_produk.id as kategori_id, kategori_produk.kategori, satuan_produk.id as satuan_id, satuan_produk.satuan');
+		$this->db->select('produk.id, produk.id_resep, produk.barcode, produk.nama_produk, produk.harga, produk.stok, kategori_produk.id as kategori_id, kategori_produk.kategori, satuan_produk.id as satuan_id, satuan_produk.satuan');
 		$this->db->from($this->table);
 		$this->db->join('kategori_produk', 'produk.kategori = kategori_produk.id');
 		$this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id');

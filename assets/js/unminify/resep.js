@@ -7,13 +7,13 @@ function addRow() {
 	var cell4 = row.insertCell(3);
 	var date = new Date();
 	cell1.innerHTML = '<div class="form-group"><select id="bahan'+date.getTime()+'" name="menuName[]" class="form-control select2" required></select><input type="hidden" id="id_bahan_before" value="0"></div>';
-	cell2.innerHTML = '<div class="form-group"> <input class="form-control" type="number" name="qty[]" min="0" required /> </div>';
-	cell3.innerHTML = '<div class="form-group"> <input type="radio" class="form-control" name="isBahanUtama" required /> </div>';
+	cell2.innerHTML = '<div style="display: flex; align-items: center;"> <div class="form-group" style="margin-right: 5px;"> <input class="form-control" type="number" name="qty[]" min="1" required /></div><div><div class="col-auto align-self-center" id="satuan'+date.getTime()+'"></div></div></div>';
+	cell3.innerHTML = '<div class="form-group"> <input type="radio" class="form-control" name="isBahanUtama" required /></div>';
 	cell4.innerHTML = '<button class="btn btn-info btn-sm" type="button" onclick="removeRow(this)">Remove</button>';
 	
 	// Muat kembali data ke dropdown setiap kali baris baru ditambahkan
-	loadDataToDropdown('#bahan'+date.getTime());
-  }
+	loadDataToDropdown('#bahan'+date.getTime(), '#satuan'+date.getTime());
+}
   
 function removeRow(button) {
 	var row = button.parentNode.parentNode;
@@ -49,7 +49,7 @@ function removeRowEdit(button,id_resep) {
 	// console.log('id_resep', id_resep);
 }
 
-function loadDataToDropdown(id) {
+function loadDataToDropdown(id, id_satuan) {
 	$(id).select2({
 		placeholder: "Bahan",
 		ajax: {
@@ -68,7 +68,10 @@ function loadDataToDropdown(id) {
 			},
 			cache: true
 		}
-	});
+	}).on('change', function() {
+		var selectedData = $(id).select2('data')[0];
+        $(id_satuan).text('/ '+selectedData.satuan);
+    });
 }
 
 let url;
@@ -313,7 +316,7 @@ function add() {
     $(".modal-title").html("Add Data");
     $('.modal button[type="submit"]').html("Create Resep");
 	// Panggil fungsi untuk memuat data saat halaman dimuat
-    loadDataToDropdown('#bahan');
+    loadDataToDropdown('#bahan','#satuan');
 }
 
 function edit(id) {
@@ -329,17 +332,18 @@ function edit(id) {
 			$('#menuTable').find('tr:gt(0)').remove();
 			$('#id').val(res.id_resep);
 			$('#nama').val(res.nama_resep);
-			var totalRupiah = res.total_cost.toLocaleString('id-ID', {
+			var tc = parseInt(res.total_cost);
+			var totalRupiah = tc.toLocaleString('id-ID', {
 				style: 'currency',
 				currency: 'IDR'
 			});
 			$('#cost').val(totalRupiah);
-			
+
 			res.bahan.forEach((bahan, index) => {
 				// Membuat elemen <tr> baru untuk setiap bahan
 				var newRow = $('<tr>');
-				newRow.append('<td><div class="form-group"><select id="bahan" class="form-control select2" name="menuName[]" required><option value="' + bahan.id_bahan + '">' + bahan.nama_bahan + '</option></select></div><input type="hidden" id="id_bahan_before" value="'+ bahan.id_bahan +'"></td>');
-				newRow.append('<td><div class="form-group"><input class="form-control" type="number" name="qty[]" min="0" value="' + bahan.qty + '" required /></div></td>');
+				newRow.append('<td><div class="form-group"><select id="bahan'+index+'" class="form-control select2" name="menuName[]" required><option value="' + bahan.id_bahan + '">' + bahan.nama_bahan + '</option></select></div><input type="hidden" id="id_bahan_before" value="'+ bahan.id_bahan +'"></td>');
+				newRow.append('<td><div style="display: flex; align-items: center;"> <div class="form-group" style="margin-right: 5px;"> <input class="form-control" type="number" name="qty[]" min="1" value="' + bahan.qty + '" required /></div><div><div class="col-auto align-self-center" id="satuan'+index+'">/ '+bahan.satuan+'</div></div></div></td>');
 				newRow.append('<td><div class="form-group"><input type="radio" class="form-control" name="isBahanUtama" ' + (bahan.isBahanUtama == '1' ? 'checked' : '') + ' required /></div></td>');
 				if (bahan.length === 1 || bahan.isBahanUtama == '1') {
 					newRow.append('<td></td>');
@@ -349,7 +353,7 @@ function edit(id) {
 				
 				// Menambahkan baris baru ke dalam tabel
 				$('#menuTable').append(newRow);
-				loadDataToDropdown('#bahan');
+				loadDataToDropdown('#bahan'+index, '#satuan'+index);
 			});
 
             $(".modal").modal("show");

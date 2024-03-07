@@ -23,11 +23,13 @@ class Produk extends CI_Controller {
 		if ($this->produk_model->read()->num_rows() > 0) {
 			foreach ($this->produk_model->read()->result() as $produk) {
 				$data[] = array(
+					'id_resep' => $produk->id_resep,
+					'nama_resep' => $produk->nama_resep." <b>("."Rp.".number_format($produk->cost_resep, 0, ',', '.').",-".")</b>",
 					'barcode' => $produk->barcode,
 					'nama' => $produk->nama_produk,
 					'kategori' => $produk->kategori,
 					'satuan' => $produk->satuan,
-					'harga' => $produk->harga,
+					'harga' => "Rp.".number_format($produk->harga, 0, ',', '.').",-",
 					'stok' => $produk->stok,
 					'action' => '<button class="btn btn-sm btn-success" onclick="edit('.$produk->id.')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove('.$produk->id.')">Delete</button>'
 				);

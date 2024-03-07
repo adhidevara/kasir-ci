@@ -63,7 +63,7 @@
 </div>
 
 <div class="modal fade" id="modal">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-xl">
 <div class="modal-content">
   <div class="modal-header">
     <h5 class="modal-title">Add Data</h5>
@@ -93,7 +93,7 @@
 				</tr>
 				<tr id='tr'>
 					<td><div class="form-group"><select id="bahan" name="menuName[]" class="form-control select2" required></select></div><input type="hidden" id="id_bahan_before" value="0"></td>
-					<td><div class="form-group"><input class="form-control" type="number" name="qty[]" min="0" required /></div></td>
+					<td><div style="display: flex; align-items: center;"> <div class="form-group" style="margin-right: 5px;"> <input class="form-control" type="number" name="qty[]" min="1" required /></div><div><div class="col-auto align-self-center" id="satuan"></div></div></div></td>
 					<td><div class="form-group"><input type="radio" class="form-control" name="isBahanUtama" required /></div></td>
 					<td></td>
 				</tr>
